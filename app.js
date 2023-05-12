@@ -1,13 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
-const { authRouter } = require("./routes/api/authRouter");
-const { usersRouter } = require("./routes/api/usersRouter");
+const { authRouter } = require("./src/routes/api/authRouter");
+const { usersRouter } = require(".src/routes/api/usersRouter");
 require("dotenv").config();
 
 const app = express();
-
-const { PORT } = process.env;
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
@@ -24,10 +22,6 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
-});
-
-app.listen(PORT, () => {
-  console.log(`This app listening on port ${PORT}!`);
 });
 
 module.exports = app;
