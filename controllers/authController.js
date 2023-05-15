@@ -42,7 +42,6 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  console.log(req.headers);
   const { email, password } = req.body;
 
   // Searching the user and compare the password
