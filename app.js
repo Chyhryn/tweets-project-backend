@@ -3,6 +3,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const { authRouter } = require("./routes/api/authRouter");
 const { usersRouter } = require("./routes/api/usersRouter");
+const { healthzCheckRouter } = require("./routes/api/healthzCheckRouter");
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(logger(formatsLogger));
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
+app.use("/healthz", healthzCheckRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 
