@@ -11,16 +11,8 @@ const port = process.env.PORT || 8080;
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res
-    .setHeader("Access-Control-Allow-Origin", "*")
-    .setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-    .setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
